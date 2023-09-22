@@ -1,0 +1,23 @@
+:root {
+    --bg-main-color: #F2F4F3;
+    --bg-button-color: #648381;
+
+    --text-main-color: #1C1C1C;
+    --text-secondary-color: #F2F4F3;
+    --text-special-color: #FF6B6B;
+
+    --text-font-light: 200;
+    --text-font-bold: 700;
+
+    --input-border-radius: 16px;
+    --button-border-radius: 8px;
+}
+
+.login-container {
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
