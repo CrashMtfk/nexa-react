@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import Background from '../assets/frame_bg.svg';
+import { Link } from 'react-router-dom';
+import Logo from '../assets/logo_sign_login.svg';
+import '../styles/login.css';
 
 class Login extends Component {
     render() {
         return (
-            <div className='login-root' style={{backgroundImage: `url(${Background})`}}>
+            <div className='login-root'>
                 <div className="login-container">
-                    <div className="left-side">
+                    <div className="left-side-login">
                         <h2>Welcome Back!</h2>
-                        <form action="">
-                            <label htmlFor="username">Username</label><br/>
+                        <form action="" className='form-login'>
+                            <label htmlFor="username">Username</label>
                             <input type="text" name="username" id="username"/>
-                            <label htmlFor="password">Password</label><br/>
+                            <label htmlFor="password">Password</label>
                             <input type="password" name="password" id="password"/>
                         </form>
-                        <button type="submit">Log In</button>
-                        <p>No account? <a href="www.google.com">Sign Here</a></p>
+                        <button type="submit" className='submit-login'>Log In</button>
+                        <p>No account? <Link to="/register">Sign here</Link></p>
                     </div>
-                    <div className="right-side">
-                        <img src="../assets/logo_sign_login.svg" alt="Nexa logo" />
+                    <div className="right-side-login">
+                        <img src={Logo} alt="Nexa logo" />
                         <h1>I hope you have a humanly day!<br/>or something like that...<br/>my data mixed up again</h1>
                     </div>
                 </div>
