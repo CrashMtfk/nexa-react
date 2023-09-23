@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Logo from '../assets/logo_sign_login.svg';
 import { Link } from "react-router-dom";
+import '../styles/register.css'
 
 class Register extends Component {
     render(){
@@ -13,17 +14,17 @@ class Register extends Component {
                         <h2>Let's start with making<br/>an account.</h2>
                     </div>
                     <div className="right-side-register">
-                    <h1>Register</h1>
-                        <form action="">
-                            <label htmlFor="username">Username</label><br/>
-                            <input type="text" name="username" id="username"/><br/>
-                            <label htmlFor="playerName">Player Name</label><br/>
-                            <input type="text" name="playerName" id="playerName"/><br/>
-                            <label htmlFor="password">Password</label><br/>
+                        <h1>Register</h1>
+                        <form action="" className="form-register">
+                            <label htmlFor="username">Username</label>
+                            <input type="text" name="username" id="username"/>
+                            <label htmlFor="playerName">Player Name</label>
+                            <input type="text" name="playerName" id="playerName"/>
+                            <label htmlFor="password">Password</label>
                             <input type="password" name="password" id="password"/>
                         </form>
-                        <button type="submit">Register</button>
-                        <p>Already registered?<Link to="/login">Log in</Link></p>
+                        <button type="submit" className="submit-register">Register</button>
+                        <p>Already registered?<Link to="/">Log in</Link></p>
                     </div>
                 </div>
             </div>
