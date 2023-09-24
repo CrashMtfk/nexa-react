@@ -1,22 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Logo from '../assets/logo_sign_login.svg';
 import '../styles/login.css';
 
-class Login extends Component {
-    render() {
+export default function Login(){
+
+        const [userData, setUserData] = useState({
+            username: '',
+            password: ''
+        });
+
+        const loginUser = (event) => {
+            event.preventDefault();
+            axios.post('http://localhost:8080/api/auth/authenticate', {
+                username : userData.username,
+                password : userData.password
+            })
+            .then(resp => {
+                console.log(resp.data);
+            });
+        };
+
         return (
             <div className='login-root'>
                 <div className="login-container">
                     <div className="left-side-login">
                         <h2>Welcome Back!</h2>
-                        <form action="" className='form-login'>
+                        <form action="" onSubmit={loginUser} className='form-login'>
                             <label htmlFor="username">Username</label>
-                            <input type="text" name="username" id="username"/>
+                            <input type="text" onChange={e => setUserData({...userData, username : e.target.value})} name="username" id="username"/>
                             <label htmlFor="password">Password</label>
-                            <input type="password" name="password" id="password"/>
+                            <input type="password" onChange={e => setUserData({...userData, password : e.target.value})} name="password" id="password"/>
+                            <button type="submit" className='submit-login'>Log In</button>
                         </form>
-                        <button type="submit" className='submit-login'>Log In</button>
                         <p>No account? <Link to="/register">Sign here</Link></p>
                     </div>
                     <div className="right-side-login">
@@ -26,7 +43,4 @@ class Login extends Component {
                 </div>
             </div>
         );
-    }
 }
-
-export default Login;

@@ -1,10 +1,30 @@
-import React, {Component} from "react";
+import React from "react";
+import { useState } from "react";
 import Logo from '../assets/logo_sign_login.svg';
 import { Link } from "react-router-dom";
+import axios from "axios";
 import '../styles/register.css'
 
-class Register extends Component {
-    render(){
+export default function Register() {
+        const [userData, setUserData] = useState({
+            playerName: '',
+            username: '',
+            password: ''
+        });
+
+        const registerUser = (event) => {
+            event.preventDefault();
+            console.log(userData.username + ' ' + userData.playerName + ' ' + userData.password);
+            axios.post('http://localhost:8080/api/auth/register', {
+                playerName: userData.playerName,
+                username: userData.username,
+                password: userData.password
+            })
+            .then(resp => {
+                console.log(resp.data);
+            });
+        };
+
         return (
             <div className="register-root">
                 <div className="register-container">
@@ -15,21 +35,18 @@ class Register extends Component {
                     </div>
                     <div className="right-side-register">
                         <h1>Register</h1>
-                        <form action="" className="form-register">
+                        <form action="" onSubmit={registerUser} className="form-register">
                             <label htmlFor="username">Username</label>
-                            <input type="text" name="username" id="username"/>
+                            <input type="text" onChange={e => setUserData({...userData, username:e.target.value})} name="username" id="username"/>
                             <label htmlFor="playerName">Player Name</label>
-                            <input type="text" name="playerName" id="playerName"/>
+                            <input type="text" onChange={e => setUserData({...userData,playerName : e.target.value})} name="playerName" id="playerName"/>
                             <label htmlFor="password">Password</label>
-                            <input type="password" name="password" id="password"/>
+                            <input type="password" onChange={e => setUserData({...userData,password : e.target.value})} name="password" id="password"/>
+                            <button type="submit" className="submit-register">Register</button>
                         </form>
-                        <button type="submit" className="submit-register">Register</button>
                         <p>Already registered?<Link to="/">Log in</Link></p>
                     </div>
                 </div>
             </div>
         );
     }
-}
-
-export default Register;
