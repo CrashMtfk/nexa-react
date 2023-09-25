@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import Logo from '../assets/logo_sign_login.svg';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/register.css'
 
 export default function Register() {
+
+        const navigate = useNavigate();
+
         const [userData, setUserData] = useState({
             playerName: '',
             username: '',
@@ -21,7 +24,9 @@ export default function Register() {
                 password: userData.password
             })
             .then(resp => {
-                console.log(resp.data);
+                const authenticatedUser = resp.data;
+                localStorage.setItem('token', authenticatedUser.token);
+                navigate("/dashboard", {state: authenticatedUser.userId});
             });
         };
 

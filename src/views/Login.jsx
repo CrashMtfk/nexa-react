@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../assets/logo_sign_login.svg';
 import '../styles/login.css';
 
 export default function Login(){
+
+        const navigate = useNavigate();
 
         const [userData, setUserData] = useState({
             username: '',
@@ -18,7 +20,9 @@ export default function Login(){
                 password : userData.password
             })
             .then(resp => {
-                console.log(resp.data);
+                const authenticatedUser = resp.data;
+                localStorage.setItem('token', authenticatedUser.token);
+                navigate("/dashboard", {state: authenticatedUser.userId});
             });
         };
 
