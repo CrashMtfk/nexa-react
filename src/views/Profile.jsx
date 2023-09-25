@@ -1,15 +1,14 @@
 import React from "react";
 import SidebarNav from "../components/SidebarNav";
 
-export default function Dashboard(){
-
+export default function Profile(){
     return (
-        <div className="dashboard-root">
-            <div className="">
+        <div>
+            <div>
                 <SidebarNav/>
             </div>
             <div>
-                <h1>Dashboard</h1>
+                <h1>Profile</h1>
             </div>
         </div>
     );
