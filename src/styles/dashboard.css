@@ -1,0 +1,11 @@
+.dashboard-root {
+    background-color: var(--bg-main-color);
+    height: 100vh;
+}
+
+.components {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}

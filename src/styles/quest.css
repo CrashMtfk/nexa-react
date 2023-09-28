@@ -1,0 +1,41 @@
+.quest-card {
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    text-align: left;  
+    align-items: center;
+    height: 40px;
+    line-height: 50px;
+    width: 280px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.complete-button {
+    border-radius: 16px;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.quest-card > h3 {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.buttons-container {
+    display: flex;
+}
+
+.buttons-container > * {
+    border-radius: 16px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--bg-main-color);
+}
+
