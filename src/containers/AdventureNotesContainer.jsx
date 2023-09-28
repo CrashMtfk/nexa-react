@@ -18,7 +18,6 @@ export default function AdventureNotesContainer({userId}){
             }
         })
         .then(resp => {
-            console.log(resp.data);
             setAdventureNotes(resp.data);
         })
     }

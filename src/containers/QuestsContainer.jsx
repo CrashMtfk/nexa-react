@@ -9,7 +9,7 @@ export default function QuestsContainer({userId}){
 
     useEffect(() => {
         getQuests();
-    });
+    },[]);
 
     const getQuests = () => {
         axios.get(`http://localhost:8080/user/quests/${userId}`,{
@@ -36,7 +36,7 @@ export default function QuestsContainer({userId}){
                 <div className="quests-box">
                     {quests.map((quest) => {
                         return (
-                            <Quest currentQuest={quest} className={quest.id} key={quest.id}/>
+                            <Quest currentQuest={quest} getQuests={getQuests} className={quest.id} key={quest.id}/>
                         );
                     })}
                 </div>
