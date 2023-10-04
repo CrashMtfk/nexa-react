@@ -2,6 +2,11 @@
     display: none;
 }
 
+input[type="text"], input[type="password"], input[type="number"], textarea {
+    outline: none;
+    border: 1px solid #1C1C1C;
+}
+
 .quests-root {
     border: 1px solid black;
     border-radius: 8px;
@@ -21,12 +26,12 @@
     background-color: var(--bg-button-color);
 }
 
-.quests-header > *{
+.quests-header > * , .quest-add > *{
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.quests-header > h2 {
+.quests-header > h2{
     position: relative;
     font-size: 18px;
     color: white;
@@ -36,7 +41,23 @@
     transform: translate(-50%,0);
 }
 
-.add-quest {
+.quest-add {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.quest-add > h2 {
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 0px 4px 4px rgba(28,28,28,0.25);
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+.add-quest, .add-cancel {
     width: 32px;
     height: 32px;
     border-radius: 16px;
@@ -47,10 +68,26 @@
     color: white;
 }
 
-.add-quest:hover{
+.add-quest:hover, .add-cancel:hover{
     color: black;
     background-color: white;
     transition: 0.5s;
+}
+
+.quest-form form{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+    justify-content: center;
+}
+
+.quest-form form > input {
+    height: 30px;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: var(--input-border-radius);
+    margin-bottom: 5%;
 }
 
 .quest-container {
