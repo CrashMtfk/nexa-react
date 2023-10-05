@@ -3,7 +3,7 @@ import AdventureNote from '../components/AdventureNote';
 import '../styles/adventure_notes_container.css';
 import axios from "axios";
 
-export default function AdventureNotesContainer({userId}){
+export default function AdventureNotesContainer({userId, setIsAddingAdvNote}){
 
     const [adventureNotes, setAdventureNotes] = useState([]);
 
@@ -26,7 +26,7 @@ export default function AdventureNotesContainer({userId}){
         <div className="adventure-notes-root">
             <div className="adventure-notes-header">
                 <h2>Adventure Notes</h2>
-                <button className="add-adventure-note">+</button>
+                <button className="add-adventure-note" onClick={e => setIsAddingAdvNote(true)}>+</button>
             </div>
             <div className="adventure-note-container">
                 <div className="adventure-notes-box">
