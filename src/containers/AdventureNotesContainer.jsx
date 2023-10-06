@@ -31,7 +31,7 @@ export default function AdventureNotesContainer({userId, setIsAddingAdvNote}){
             <div className="adventure-note-container">
                 <div className="adventure-notes-box">
                     {adventureNotes.map((note) => {
-                        return <AdventureNote currentNote={note} className={note.id} key={note.id}/>
+                        return <AdventureNote currentNote={note} getAdventureNotes={getAdventureNotes} className={note.id} key={note.id}/>
                     })}
                 </div>
             </div>
