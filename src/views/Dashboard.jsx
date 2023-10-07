@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import '../styles/dashboard.css'
 import AdventureNotesContainer from "../containers/AdventureNotesContainer";
 import AdventureNoteAdd from "../components/AdventureNoteAdd";
+import PomodoroContainer from "../containers/PomodoroContainer";
+import JourneysContainer from "../containers/JourneysContainer";
 
 export default function Dashboard(){
     const location = useLocation();
@@ -22,9 +24,15 @@ export default function Dashboard(){
                 </div>
                 :
                 <div className="components">
-                <QuestsContainer userId={location.state}></QuestsContainer>
-                <AdventureNotesContainer userId={location.state} setIsAddingAdvNote = {setIsAddingAdvNote}></AdventureNotesContainer>
-            </div>
+                    <div className="top-components">
+                        <QuestsContainer userId={location.state}></QuestsContainer>
+                        <PomodoroContainer/>
+                        <AdventureNotesContainer userId={location.state} setIsAddingAdvNote = {setIsAddingAdvNote}></AdventureNotesContainer>
+                    </div>
+                    <div className="bottom-component">
+                        <JourneysContainer userId={location.state}/>
+                    </div>
+                </div>
             }
         </div>
     );
