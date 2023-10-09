@@ -11,13 +11,23 @@
     display: flex;
 }
 
+.controls-container {
+    display: flex;
+}
+
+.controls-container > button {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
 .journey-top > h2 {
     white-space: nowrap;
     color: var(--bg-button-color);
     text-shadow: 0px 4px 4px rgba(28,28,28,0.25);
 }
 
-.journey-top > span {
+.journey-top > span, .j-buttons-line {
     height: 1px;
     background-color: black;
     margin: auto;
@@ -30,6 +40,14 @@
 
 .j-second-line {
     width: 100%;
+}
+
+.j-buttons-line {
+    width: 10%;
+}
+
+.j-third-line{
+    width: 10%;
 }
 
 .j-complete-button {

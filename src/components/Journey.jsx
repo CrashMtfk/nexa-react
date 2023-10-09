@@ -1,10 +1,23 @@
 import React from "react";
 import '../styles/journey.css';
 import * as AiIcons from 'react-icons/ai';
+import axios from "axios";
 
-export default function Journey({journey}){
+export default function Journey({journey, getJourneys}){
 
     const stages = journey.stageDTOSet;
+
+    const deleteJourney = () => {
+        axios.delete(`http://localhost:8080/user/journey/${journey.id}`,
+        {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.token,
+            }
+        })
+        .then(resp => {
+            getJourneys();
+        })
+    }
 
     return(
         <div className="j-root">
@@ -12,6 +25,12 @@ export default function Journey({journey}){
                 <span className="j-first-line"></span>
                 <h2>{journey.title}</h2>
                 <span className="j-second-line"></span>
+                <div className="controls-container">
+                    <button className="edit-button"><AiIcons.AiOutlineEdit/></button>
+                    <span className="j-buttons-line"></span>
+                    <button className="delete-button" onClick={deleteJourney}><AiIcons.AiOutlineDelete/></button>
+                </div>
+                <span className="j-third-line"></span>
             </div>
             <div className="journey-middle">
                 <span className="jm-left"></span>

@@ -18,7 +18,6 @@ export default function JourneysContainer({userId}){
             }
         })
         .then(resp => {
-            console.log(resp.data);
             setJourneys(resp.data);
         })
     }
@@ -34,7 +33,7 @@ export default function JourneysContainer({userId}){
             </div>
             <div className="journeys-container">
                 {journeys.map((journey) => {
-                    return <Journey journey={journey} key={journey.id} className={journey.id}/>
+                    return <Journey journey={journey} getJourneys={getJourneys} key={journey.id} className={journey.id}/>
                 })}
             </div>
         </div>
