@@ -10,7 +10,7 @@ export const SidebarData = [
     },
     {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/dashboard/main-panel",
         icon: <AiIcons.AiOutlineAim/>,
         cName: "nav-text",
     }, 

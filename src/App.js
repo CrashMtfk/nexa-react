@@ -4,14 +4,18 @@ import Register from './views/Register';
 import Dashboard from './views/Dashboard';
 import Profile from './views/Profile';
 import Leaderboard from './views/Leaderboard';
+import JourneyAdd from './components/JourneyAdd';
 
 function App() {
   return <Routes>
     <Route path='/' element={<Login />}/>
-    <Route path='/register' element={<Register/>}/>
-    <Route path='/dashboard' element={<Dashboard/>}/>
-    <Route path='/profile' element={<Profile/>}/>
-    <Route path='/leaderboard' element={<Leaderboard/>}/>
+    <Route path='register' element={<Register/>}/>
+    <Route path='dashboard'>
+      <Route path='main-panel' element={<Dashboard/>}/>
+      <Route path='add-journey' element={<JourneyAdd/>}/>
+    </Route>
+    <Route path='profile' element={<Profile/>}/>
+    <Route path='leaderboard' element={<Leaderboard/>}/>
   </Routes>
 }
 

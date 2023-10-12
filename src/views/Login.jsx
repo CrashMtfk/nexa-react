@@ -22,7 +22,8 @@ export default function Login(){
             .then(resp => {
                 const authenticatedUser = resp.data;
                 localStorage.setItem('token', authenticatedUser.token);
-                navigate("/dashboard", {state: authenticatedUser.userId});
+                localStorage.setItem('userId', authenticatedUser.userId);
+                navigate("/dashboard/main-panel");
             });
         };
 

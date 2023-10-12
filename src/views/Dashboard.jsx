@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SidebarNav from "../components/SidebarNav";
 import QuestsContainer from "../containers/QuestsContainer";
-import { useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import '../styles/dashboard.css'
 import AdventureNotesContainer from "../containers/AdventureNotesContainer";
 import AdventureNoteAdd from "../components/AdventureNoteAdd";
@@ -9,8 +9,9 @@ import PomodoroContainer from "../containers/PomodoroContainer";
 import JourneysContainer from "../containers/JourneysContainer";
 
 export default function Dashboard(){
-    const location = useLocation();
+    const currentUserId = localStorage.userId;
     const [isAddingAdvNote, setIsAddingAdvNote] = useState(false);
+     
 
     return (
         <div className="dashboard-root">
@@ -20,18 +21,19 @@ export default function Dashboard(){
             {
                 isAddingAdvNote ?
                 <div className="adventure-note-add-component">
-                    <AdventureNoteAdd userId={location.state} setIsAddingAdvNote={setIsAddingAdvNote}/>
+                    <AdventureNoteAdd userId={currentUserId} setIsAddingAdvNote={setIsAddingAdvNote}/>
                 </div>
                 :
                 <div className="components">
                     <div className="top-components">
-                        <QuestsContainer userId={location.state}></QuestsContainer>
+                        <QuestsContainer userId={currentUserId}></QuestsContainer>
                         <PomodoroContainer/>
-                        <AdventureNotesContainer userId={location.state} setIsAddingAdvNote = {setIsAddingAdvNote}></AdventureNotesContainer>
+                        <AdventureNotesContainer userId={currentUserId} setIsAddingAdvNote = {setIsAddingAdvNote}></AdventureNotesContainer>
                     </div>
                     <div className="bottom-component">
-                        <JourneysContainer userId={location.state}/>
+                        <JourneysContainer userId={currentUserId}/>
                     </div>
+                    <Outlet context={currentUserId}/>
                 </div>
             }
         </div>
