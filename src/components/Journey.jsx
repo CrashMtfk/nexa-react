@@ -2,10 +2,12 @@ import React from "react";
 import '../styles/journey.css';
 import * as AiIcons from 'react-icons/ai';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Journey({journey, getJourneys}){
 
     const stages = journey.stageDTOSet;
+    const navigate = useNavigate();
 
     const deleteJourney = () => {
         axios.delete(`http://localhost:8080/user/journey/${journey.id}`,
@@ -26,7 +28,12 @@ export default function Journey({journey, getJourneys}){
                 <h2>{journey.title}</h2>
                 <span className="j-second-line"></span>
                 <div className="controls-container">
-                    <button className="edit-button"><AiIcons.AiOutlineEdit/></button>
+                    <button 
+                        className="edit-button"
+                        onClick={() => 
+                            navigate("/dashboard/edit-journey", {state:{journey:journey}})}>
+                        <AiIcons.AiOutlineEdit/>
+                    </button>
                     <span className="j-buttons-line"></span>
                     <button className="delete-button" onClick={deleteJourney}><AiIcons.AiOutlineDelete/></button>
                 </div>
