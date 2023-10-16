@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import * as AiIcons from "react-icons/ai";
+import * as BsIcons from "react-icons/bs";
 import '../styles/quest.css';
 import axios from "axios";
 
 export default function Quest({currentQuest, getQuests}){
 
     const [questStatus, setQuestStatus] = useState(false);
+    const [isMoreDetailsExpanded, setIsMoreDetailsExpanded] = useState(false);
 
     const deleteQuest = () => {
         axios.delete(`http://localhost:8080/user/quest/${currentQuest.id}`,{
@@ -19,12 +21,43 @@ export default function Quest({currentQuest, getQuests}){
     }
 
     return (
-        <div className="quest-card">
-            <button className="complete-button" onClick={() => setQuestStatus(!questStatus)}>{questStatus ? <AiIcons.AiOutlineCheckCircle />: null}</button>
-            <h3>{currentQuest.title}</h3>
+        <div className={isMoreDetailsExpanded ? "quest-card-expanded" : "quest-card"}>
+            {questStatus ? 
+                <AiIcons.AiOutlineCheckCircle 
+                    className="complete-button"
+                    onClick={() => setQuestStatus(!questStatus)}/>
+                : 
+                <BsIcons.BsCircle 
+                    className="complete-button" 
+                    onClick={() => setQuestStatus(!questStatus)}/>
+            }
+            <div className="quest-content-container">
+                <h3 className="quest-title">{currentQuest.title}</h3>
+                {isMoreDetailsExpanded ? 
+                    (
+                    <div className="quest-details">
+                        <span className="divider"></span>
+                        <p>Rank: {currentQuest.difficulty.grade}</p>
+                        <p>Experience: {currentQuest.difficulty.experience}</p>
+                        <p>Coins: {currentQuest.difficulty.coins}</p>
+                    </div>
+                    )
+                : 
+                null
+                }
+            </div>
             <div className="buttons-container">
-                <button className="more-details-button"><AiIcons.AiOutlineArrowLeft/></button>
-                <button className="delete-button" onClick={deleteQuest}><AiIcons.AiOutlineDelete/></button>
+                {isMoreDetailsExpanded ? 
+                    <AiIcons.AiOutlineArrowDown
+                        className="more-details-button"
+                        onClick={() => setIsMoreDetailsExpanded(!isMoreDetailsExpanded)}/>
+                    :
+                    <AiIcons.AiOutlineArrowLeft
+                        className="more-details-button" 
+                        onClick={() => setIsMoreDetailsExpanded(!isMoreDetailsExpanded)}/>}
+                <AiIcons.AiOutlineDelete
+                    className="delete-button"
+                    onClick={deleteQuest}/>
             </div>
         </div>
     )

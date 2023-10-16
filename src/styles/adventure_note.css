@@ -1,0 +1,48 @@
+.adventure-note-card{
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    text-align: left;  
+    align-items: center;
+    height: 50px;
+    line-height: 50px;
+    width: 280px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.adv-note-logo {
+    width: 20px;
+    height: 20px;
+    color: var(--text-special-color);
+}
+
+.adv-note-title {
+    margin-left: 2%;
+    font-weight: 550;
+}
+
+.buttons-container-note {
+    display: flex;
+    margin-left: auto;
+}
+
+.buttons-container-note > * {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg-main-color);
+    margin-left: 3%;
+}
+
+.delete-note-button:hover {
+    color: red;
+}
+
+.edit-note-button:hover {
+    color: cadetblue;
+}
+

@@ -1,10 +1,17 @@
+.divider {
+    margin-top: 10%;
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
 .quest-card {
     border: 1px solid black;
     border-radius: 8px;
     display: flex;
     text-align: left;  
     align-items: center;
-    height: 40px;
+    height: 50px;
     line-height: 50px;
     width: 280px;
     padding: 5px;
@@ -14,28 +21,62 @@
     margin-bottom: 10px;
 }
 
+.quest-card-expanded {
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    text-align: left;  
+    align-items: top;
+    height: 105px;
+    width: 280px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .complete-button {
-    border-radius: 16px;
-    width: 16px;
-    height: 16px;
+    color: var(--text-special-color);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
     margin-right: 5px;
 }
 
-.quest-card > h3 {
-    width: 200px;
+.quest-title {
+    font-size: 16px;
+    font-weight: 550;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
+.quest-details {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+}
+
+.quest-details > p {
+    line-height: 25px;
+    font-size: 14px;
+}
+
 .buttons-container {
     display: flex;
+    margin-left: auto;
 }
 
 .buttons-container > * {
-    border-radius: 16px;
-    width: 30px;
-    height: 30px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
     background-color: var(--bg-main-color);
+    margin-left: 3%;
+}
+
+.delete-button:hover {
+    color: red;
 }
 
