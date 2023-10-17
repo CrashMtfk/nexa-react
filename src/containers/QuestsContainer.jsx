@@ -55,16 +55,16 @@ export default function QuestsContainer({userId}){
         <div className="quests-root">
             {
                 isAddingQuest ?
-                <div>
-                    <div className="quest-add">
+                <div className="quest-add-root">
+                    <div className="quests-header">
                         <h2>Add Quest</h2>
                         <button className="add-cancel" onClick={() => setIsAddingQuest(!isAddingQuest)}>x</button>
                     </div>
                     <div className="quest-form">
                         <form action="" onSubmit={createQuest}>
-                            <input type="text" onChange={e => setQuestTitle(e.target.value)} name="title" id="title"/>
-                            <input type="number" onChange={e => setDifficulty(e.target.value)} name="difficulty" id="difficulty"/><br/>
-                            <button type="submit">Submit</button>
+                            <input type="text" placeholder="Title" onChange={e => setQuestTitle(e.target.value)} name="title" id="title"/>
+                            <input type="number" placeholder="Difficulty" onChange={e => setDifficulty(e.target.value)} name="difficulty" id="difficulty"/><br/>
+                            <button type="submit" className="submit-add">Submit</button>
                         </form>
                     </div>
                 </div>

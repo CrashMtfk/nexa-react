@@ -1,6 +1,8 @@
 import React from "react";
 import '../styles/journey.css';
 import * as AiIcons from 'react-icons/ai';
+import * as BsIcons from 'react-icons/bs';
+import * as BiIcons from 'react-icons/bi';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -28,28 +30,25 @@ export default function Journey({journey, getJourneys}){
                 <h2>{journey.title}</h2>
                 <span className="j-second-line"></span>
                 <div className="controls-container">
-                    <button 
+                    <BiIcons.BiEdit
                         className="edit-button"
                         onClick={() => 
-                            navigate("/dashboard/edit-journey", {state:{journey:journey}})}>
-                        <AiIcons.AiOutlineEdit/>
-                    </button>
+                            navigate("/dashboard/edit-journey", {state:{journey:journey}})} />
                     <span className="j-buttons-line"></span>
-                    <button className="delete-button" onClick={deleteJourney}><AiIcons.AiOutlineDelete/></button>
+                    <AiIcons.AiTwotoneDelete className="delete-button" onClick={deleteJourney}/>
                 </div>
                 <span className="j-third-line"></span>
             </div>
             <div className="journey-middle">
-                <span className="jm-left"></span>
                 <div className="stages-container">
                     {
                         stages.map((stage) => {
                             return (
                                 <div key={stage.id}>
                                     {stage.status ?
-                                        <AiIcons.AiFillCheckCircle/>
+                                        <AiIcons.AiFillCheckCircle className="j-complete-button"/>
                                         :
-                                        <button className="j-complete-button"></button>
+                                        <BsIcons.BsCircle className="j-complete-button"/>
                                     }
                                     <span className="stage-connect-line"></span>
                                 </div>
@@ -60,7 +59,6 @@ export default function Journey({journey, getJourneys}){
                         <AiIcons.AiFillCheckCircle className="finish-stage"/>
                     </div>
                 </div>
-                <span className="jm-right"></span>
             </div>
             
         </div>
