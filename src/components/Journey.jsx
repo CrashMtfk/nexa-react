@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import '../styles/journey.css';
 import * as AiIcons from 'react-icons/ai';
 import * as BsIcons from 'react-icons/bs';
@@ -31,7 +31,7 @@ export default function Journey({journey, getJourneys}){
                 <span className="j-second-line"></span>
                 <div className="controls-container">
                     <BiIcons.BiEdit
-                        className="edit-button"
+                        className="j-edit-button"
                         onClick={() => 
                             navigate("/dashboard/edit-journey", {state:{journey:journey}})} />
                     <span className="j-buttons-line"></span>
@@ -55,9 +55,9 @@ export default function Journey({journey, getJourneys}){
                             )
                         })
                     }
-                    <div className="finish-stage">
-                        <AiIcons.AiFillCheckCircle className="finish-stage"/>
-                    </div>
+                </div>
+                <div className="finish-stage-container">
+                    <AiIcons.AiFillCheckCircle className="finish-stage"/>
                 </div>
             </div>
             

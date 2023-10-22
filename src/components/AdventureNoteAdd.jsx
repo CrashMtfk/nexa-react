@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import '../styles/adventure_note_add.css';
 
 export default function AdventureNoteAdd ({userId, setIsAddingAdvNote}) {
 
@@ -27,15 +28,41 @@ export default function AdventureNoteAdd ({userId, setIsAddingAdvNote}) {
     }
 
     return (
-        <div>
-            <h2>Add Adventure Note</h2>
-            <button onClick={e => setIsAddingAdvNote(false)}>x</button>
-            <form action="" onSubmit={addAdventureNote}>
-                <input type="text" onChange={e => setTitle(e.target.value)} name="title" id="title" />
-                <input type="text" onChange={e => setAccomplishment(e.target.value)} name="accomplishment" id="accomplishment" />
-                <input type="text" onChange={e => setImprovement(e.target.value)} name="improvement" id="improvement" />
-                <input type="text" onChange={e => setThought(e.target.value)} name="thought" id="thought" />
-                <button type="submit">Add Note</button>
+        <div className="add-adv-note-root">
+            <div className="add-adv-note-header">
+                <h2>How was today journey?</h2>
+                <button className="add-cancel" onClick={e => setIsAddingAdvNote(false)}>x</button>
+            </div>
+            <form className="add-adv-note-form" action="" onSubmit={addAdventureNote}>
+                <div className="input-container">
+                    <input type="text" className="adventure-title" placeholder="Title of the adventure..." onChange={e => setTitle(e.target.value)} name="title" id="title" />
+                    <span className="sub-line"></span>
+                </div>
+                <div className="input-container">
+                    <div className="input-header">
+                        <span className="sub-line-f"></span>
+                        <h3>Today accomplishments</h3>
+                        <span className="sub-line"></span>
+                    </div>
+                    <textarea cols={40} rows={5} onChange={e => setAccomplishment(e.target.value)} name="accomplishment" id="accomplishment" />
+                </div>
+                <div className="input-container">
+                    <div className="input-header">
+                        <span className="sub-line-f"></span>
+                        <h3>What could you do better?</h3>
+                        <span className="sub-line"></span>
+                    </div>
+                    <textarea cols={40} rows={5} onChange={e => setImprovement(e.target.value)} name="improvement" id="improvement" />
+                </div>
+                <div className="input-container">
+                    <div className="input-header">
+                        <span className="sub-line-f"></span>
+                        <h3>Any thoughts stuck in your mind?</h3>
+                        <span className="sub-line"></span>
+                    </div>
+                    <textarea cols={40} rows={5} onChange={e => setThought(e.target.value)} name="thought" id="thought" />
+                </div>
+                <button type="submit" className="add-note-button">Add Note</button>
             </form>
         </div>
     );

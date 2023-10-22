@@ -49,7 +49,7 @@ export default function Quest({currentQuest, getQuests}){
             <div className="buttons-container">
                 {isMoreDetailsExpanded ? 
                     <AiIcons.AiOutlineArrowDown
-                        className="more-details-button"
+                        className="more-details-button-extended"
                         onClick={() => setIsMoreDetailsExpanded(!isMoreDetailsExpanded)}/>
                     :
                     <AiIcons.AiOutlineArrowLeft

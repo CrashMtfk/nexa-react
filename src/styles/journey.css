@@ -11,7 +11,7 @@
 
 .journey-top{
     display: flex;
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 .journey-top > h2 {
@@ -20,11 +20,16 @@
 
 .controls-container {
     display: flex;
+    cursor: pointer;
 }
 
-.edit-button {
+.j-edit-button {
     width: 32px;
     height: 32px;
+}
+
+.j-edit-button:hover{
+    color: var(--bg-button-color);
 }
 
 .delete-button {
@@ -60,26 +65,19 @@
     width: 10%;
 }
 
-.j-complete-button {
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
-}
-
 .journey-middle {
     height: 50px;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin: auto;
 }
-
-
 
 .stages-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: auto;
-    width: 90%;
+    width: 80%;
 }
 
 .stages-container > div {
@@ -94,7 +92,13 @@
     width: 100%;
 }
 
-.finish-stage {
+.finish-stage-container {
+    width: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.finish-stage, .j-complete-button {
     width: 32px;
     height: 32px;
 }

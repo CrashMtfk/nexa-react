@@ -76,6 +76,10 @@
     margin-left: 3%;
 }
 
+.more-details-button {
+    margin: auto 0;
+}
+
 .delete-button:hover {
     color: red;
 }

@@ -20,21 +20,19 @@ export default function Dashboard(){
             </div>
             {
                 isAddingAdvNote ?
-                <div className="adventure-note-add-component">
                     <AdventureNoteAdd userId={currentUserId} setIsAddingAdvNote={setIsAddingAdvNote}/>
-                </div>
                 :
-                <div className="components">
-                    <div className="top-components">
-                        <QuestsContainer userId={currentUserId}></QuestsContainer>
-                        <PomodoroContainer/>
-                        <AdventureNotesContainer userId={currentUserId} setIsAddingAdvNote = {setIsAddingAdvNote}></AdventureNotesContainer>
+                    <div className="components">
+                        <div className="top-components">
+                            <QuestsContainer userId={currentUserId}></QuestsContainer>
+                            <PomodoroContainer/>
+                            <AdventureNotesContainer userId={currentUserId} setIsAddingAdvNote = {setIsAddingAdvNote}></AdventureNotesContainer>
+                        </div>
+                        <div className="bottom-component">
+                            <JourneysContainer userId={currentUserId}/>
+                        </div>
+                        <Outlet context={currentUserId}/>
                     </div>
-                    <div className="bottom-component">
-                        <JourneysContainer userId={currentUserId}/>
-                    </div>
-                    <Outlet context={currentUserId}/>
-                </div>
             }
         </div>
     );
