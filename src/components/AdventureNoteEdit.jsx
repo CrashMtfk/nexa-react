@@ -1,6 +1,7 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import '../styles/adventure_note_edit.css';
 
 export default function AdventureNoteEdit(){
 
@@ -8,55 +9,80 @@ export default function AdventureNoteEdit(){
     const location = useLocation();
     const adventureNote = location.state.adventureNote;
 
+    useEffect(() => {
+        initializeFormWithExistingData();
+    },[]);
+
     const editAdventureNote = (e) => {
         e.preventDefault();
         axios.patch("http://localhost:8080/user/adventure_note", {
             id : adventureNote.id,
             title : adventureNote.title,
             accomplishment : adventureNote.accomplishment,
-            thought : adventureNote.though
+            improvement : adventureNote.improvement,
+            thought : adventureNote.thought
         }, {
             headers : {
                 Authorization: 'Bearer ' + localStorage.token
             }
         })
         .then(resp => {
-            navigate("/dashboard/main-panel")
+            navigate("/dashboard/main-panel");
         })
+        .catch(err => console.log(err));
+    }
+
+    const initializeFormWithExistingData = () => {
+        document.getElementById("title-" + adventureNote.id).value = adventureNote.title===undefined ? "Do you want to add something here?" : adventureNote.title;
+        document.getElementById("accomplishment-" + adventureNote.id).value = adventureNote.accomplishment === undefined ? "Do you want to add something here?" : adventureNote.accomplishment;
+        document.getElementById("improvement-" + adventureNote.id).value = adventureNote.improvement === undefined ? "Do you want to add something here?" : adventureNote.improvement;
+        document.getElementById("though-" + adventureNote.id).value = adventureNote.thought===undefined ? "Do you want to add something here?" : adventureNote.thought;
     }
 
     return (
-        <div>
-            <div className="cancel-container">
-                <button className="cancel-journey-edit" onClick={() => navigate("/dashboard/main-panel")}>x</button>
-            </div> 
-            <div className="edit-form">
-                <form action="" onSubmit={e => editAdventureNote(e)}>
-                    <input 
-                        type="text" 
-                        id={"title-" + adventureNote.id}
-                        placeholder={adventureNote.title}
-                        onChange={e => adventureNote.title = e.target.value}
+        <div className="edit-adv-note-root">
+            <div className="edit-adv-note-content">
+                <div className="cancel-container">
+                    <button className="cancel-journey-edit add-cancel" onClick={() => navigate("/dashboard/main-panel")}>x</button>
+                </div>
+                <form className="edit-adv-note-form" action="" onSubmit={e => editAdventureNote(e)}>
+                    <div className="input-container">
+                        <input 
+                            className="adventure-title"
+                            type="text" 
+                            id={"title-" + adventureNote.id}
+                            onChange={e => adventureNote.title = e.target.value}
                         />
-                    <input 
+                        <span className="sub-line"></span>
+                    </div>
+                    <div className="input-container">
+                        <textarea 
+                        cols={40}
+                        rows={5}
                         type="text" 
-                        id={"accomplishment-" + adventureNote.id} 
-                        placeholder={adventureNote.accomplishment}
+                        id={"accomplishment-" + adventureNote.id}
                         onChange={e => adventureNote.accomplishment = e.target.value}
                         />
-                    <input 
+                    </div>
+                    <div className="input-container">
+                        <textarea 
+                        cols={40}
+                        rows={5}
                         type="text" 
-                        id={"improvement-" + adventureNote.id} 
-                        placeholder={adventureNote.improvement}
+                        id={"improvement-" + adventureNote.id}
                         onChange={e => adventureNote.improvement = e.target.value}
                         />
-                    <input 
+                    </div>
+                    <div className="input-container">
+                        <textarea
+                        cols={40}
+                        rows={5}
                         type="text" 
-                        id={"though-"+ adventureNote.id} 
-                        placeholder={adventureNote.though}
-                        onChange={e => adventureNote.though = e.target.value}
+                        id={"though-"+ adventureNote.id}
+                        onChange={e => adventureNote.thought = e.target.value}
                         />
-                    <button type="submit">Confirm</button>
+                    </div>
+                    <button type="submit" className="edit-note-button-confirm">Confirm</button>
                 </form>
             </div>
         </div>
