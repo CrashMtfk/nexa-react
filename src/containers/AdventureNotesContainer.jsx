@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import AdventureNote from '../components/AdventureNote';
 import '../styles/adventure_notes_container.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function AdventureNotesContainer({userId, setIsAddingAdvNote}){
+export default function AdventureNotesContainer({userId}){
 
     const [adventureNotes, setAdventureNotes] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
      getAdventureNotes();   
@@ -26,7 +28,7 @@ export default function AdventureNotesContainer({userId, setIsAddingAdvNote}){
         <div className="adventure-notes-root">
             <div className="adventure-notes-header">
                 <h2>Adventure Notes</h2>
-                <button className="add-adventure-note" onClick={e => setIsAddingAdvNote(true)}>+</button>
+                <button className="add-adventure-note" onClick={() => navigate("/dashboard/add-adventure-note")}>+</button>
             </div>
             <div className="adventure-note-container">
                 <div className="adventure-notes-box">

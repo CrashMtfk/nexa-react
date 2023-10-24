@@ -7,6 +7,7 @@ import Leaderboard from './views/Leaderboard';
 import JourneyAdd from './components/JourneyAdd';
 import JourneyEdit from './components/JourneyEdit';
 import AdventureNoteEdit from './components/AdventureNoteEdit';
+import AdventureNoteAdd from './components/AdventureNoteAdd';
 
 function App() {
   return <Routes>
@@ -15,6 +16,7 @@ function App() {
     <Route path='dashboard'>
       <Route path='main-panel' element={<Dashboard/>}/>
       <Route path='edit-adventure-note' element={<AdventureNoteEdit/>}/>
+      <Route path='add-adventure-note' element={<AdventureNoteAdd/>}/>
       <Route path='add-journey' element={<JourneyAdd/>}/>
       <Route path='edit-journey' element={<JourneyEdit/>}/>
     </Route>
