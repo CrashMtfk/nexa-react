@@ -18,8 +18,8 @@ export default function Leaderboard(){
             }
         })
         .then(resp => {
-            setUsers(resp.data);
             console.log(resp.data);
+            setUsers(resp.data);
         })
     }
 
@@ -34,28 +34,42 @@ export default function Leaderboard(){
                         <h1>Leaderboard</h1>
                     </div>
                     <div className="leaderboard-table">
-                        <table className="leaderboard-table-content">
-                            <thead>
-                                <tr className="leaderboard-table-header">
-                                    <th>Player Name</th>
-                                    <th>Level</th>
-                                    <th>Coins</th>
-                                    <th>Experience</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div className="table-header">
+                            <div className="th-cell">
+                                <h2>Player Name</h2>
+                            </div>
+                            <div className="th-cell">
+                                <h2>Level</h2>
+                            </div>
+                            <div className="th-cell">
+                                <h2>Experience</h2>
+                            </div>
+                            <div className="th-cell">
+                                <h2>Coins</h2>
+                            </div>
+                        </div>
+                        <div className="table-content">
                             {
-                                users.map(user => {
-                                    return <tr key={user.id} className={"user-" + user.id}>
-                                        <td>{user.playerName}</td>
-                                        <td>{user.level}</td>
-                                        <td>{user.coins}</td>
-                                        <td>{user.experience+ " / " + user.requiredExperience}</td>
-                                    </tr>
+                                users.map((user) => {
+                                    return (
+                                        <div className="row" key={user.id}>
+                                            <div className="tc-name ">
+                                                {user.playerName}
+                                            </div>
+                                            <div className="tc-level ">
+                                                {user.level}
+                                            </div>
+                                            <div className="tc-experience ">
+                                                {user.experience + " / " + user.requiredExperience}
+                                            </div>
+                                            <div className="tc-coins ">
+                                                {user.coins}
+                                            </div>
+                                        </div>
+                                    )
                                 })
                             }
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
