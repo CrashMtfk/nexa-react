@@ -9,7 +9,6 @@ import JourneysContainer from "../containers/JourneysContainer";
 
 export default function Dashboard(){
     const currentUserId = localStorage.userId;
-     
 
     return (
         <div className="dashboard-root">

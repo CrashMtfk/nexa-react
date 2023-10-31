@@ -26,7 +26,8 @@ export default function Register() {
             .then(resp => {
                 const authenticatedUser = resp.data;
                 localStorage.setItem('token', authenticatedUser.token);
-                navigate("/dashboard", {state: authenticatedUser.userId});
+                localStorage.setItem('userId', authenticatedUser.userId);
+                navigate("/introduction");
             });
         };
 
