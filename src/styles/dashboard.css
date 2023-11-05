@@ -1,18 +1,18 @@
 .dashboard-root {
-    background-color: var(--bg-main-color);
-    height: 100vh;
+  background-color: var(--bg-main-color);
+  height: 100vh;
 }
 
 .components {
-    width: 65%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
+  width: 65%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .top-components {
-    width: 100%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
 }

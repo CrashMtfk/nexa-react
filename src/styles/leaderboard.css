@@ -1,78 +1,77 @@
 .leaderboard-background {
-    width: 100%;
-    height: 100vh;
-    background-color: var(--bg-main-color);
-    background-image: url('../assets/frame_bg.svg');
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-main-color);
+  background-image: url("../assets/frame_bg.svg");
 }
 
 .leaderboard-root {
-    position: absolute;
-    width: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;   
-    border: 2px solid #1C1C1C;
-    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
-    padding: 5%;
+  position: absolute;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border: 2px solid #1c1c1c;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+  padding: 5%;
 }
 
 .leaderboard-header {
-    margin: 4%;
-    font-size: 36px;
-    font-weight: bold;
+  margin: 4%;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .leaderboard-table {
-    width: 100%;
-    margin: auto;
-
+  width: 100%;
+  margin: auto;
 }
 
 .table-header {
-    display: flex;
-    width: 100%;
-    font-size: 20px;
-    font-weight: bold;
+  display: flex;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .th-cell {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 2px;
-    line-height: 50px;
-    background-color: #1C1C1C;
-    color: var(--text-secondary-color);
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 2px;
+  line-height: 50px;
+  background-color: #1c1c1c;
+  color: var(--text-secondary-color);
+  overflow: hidden;
 }
 
 .th-cell::after {
-    position: absolute;
-    transform:rotate(45deg);
-    content: '';
-    width: 40px;
-    height: 40px;
-    margin: -70px 100px;
-    background-color: var(--bg-main-color);
+  position: absolute;
+  transform: rotate(45deg);
+  content: "";
+  width: 40px;
+  height: 40px;
+  margin: -70px 100px;
+  background-color: var(--bg-main-color);
 }
 
 .table-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .row {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .row > div {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    margin: 2px;
-    background-color: #1C1C1C;
-    color: var(--text-secondary-color);
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  margin: 2px;
+  background-color: #1c1c1c;
+  color: var(--text-secondary-color);
 }

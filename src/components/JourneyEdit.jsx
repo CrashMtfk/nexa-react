@@ -32,7 +32,7 @@ export default function JourneyEdit() {
               headers: {
                 Authorization: "Bearer " + localStorage.token,
               },
-            }
+            },
           )
           .then((resp) => {
             navigate("/dashboard/main-panel");

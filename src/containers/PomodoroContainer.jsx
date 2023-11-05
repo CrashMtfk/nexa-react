@@ -1,10 +1,6 @@
 import React from "react";
-import '../styles/pomodoro_container.css'
+import "../styles/pomodoro_container.css";
 
-export default function PomodoroContainer(){
-    return (
-        <div className="pomodoro-root">
-
-        </div>
-    )
+export default function PomodoroContainer() {
+  return <div className="pomodoro-root"></div>;
 }
