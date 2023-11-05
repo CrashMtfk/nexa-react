@@ -3,7 +3,7 @@ import Logo from "../assets/logo_sign_login.svg";
 import * as AiIcons from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
-import "../styles/post_register.css";
+import "./post_register.css";
 
 export default function PostRegister() {
   const navigate = useNavigate();

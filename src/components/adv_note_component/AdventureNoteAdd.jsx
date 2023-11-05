@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import "../styles/adventure_note_add.css";
+import "./adventure_note_add.css";
 import { useNavigate } from "react-router-dom";
 import {
   processTitle,
   processSingularNoteData,
-} from "../utils/commonValidation";
+} from "../../utils/commonValidation";
 
 export default function AdventureNoteAdd() {
   const userId = localStorage.userId;
@@ -35,7 +35,7 @@ export default function AdventureNoteAdd() {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,
             },
-          },
+          }
         )
         .then((resp) => {
           setAccomplishment("");

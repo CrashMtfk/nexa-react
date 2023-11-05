@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../assets/logo_sign_login.svg";
-import "../styles/login.css";
-import { validateForm } from "../utils/validateLogin";
+import "./login.css";
+import { validateForm } from "./validateLogin";
 
 export default function Login() {
   const navigate = useNavigate();

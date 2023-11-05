@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { processTitle, verifyEmptyData } from "../utils/commonValidation";
+import { processTitle, verifyEmptyData } from "../../utils/commonValidation";
 
 export default function JourneyEdit() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function JourneyEdit() {
               headers: {
                 Authorization: "Bearer " + localStorage.token,
               },
-            },
+            }
           )
           .then((resp) => {
             navigate("/dashboard/main-panel");

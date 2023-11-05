@@ -3,7 +3,7 @@ import React from "react";
 import * as GiIcons from "react-icons/gi";
 import * as AiIcons from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import "../styles/adventure_note.css";
+import "./adventure_note.css";
 
 export default function AdventureNote({ currentNote, getAdventureNotes }) {
   const navigate = useNavigate();

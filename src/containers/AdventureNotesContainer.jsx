@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AdventureNote from "../components/AdventureNote";
+import AdventureNote from "../components/adv_note_component/AdventureNote";
 import "../styles/adventure_notes_container.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

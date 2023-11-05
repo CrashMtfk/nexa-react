@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "../styles/journey.css";
+import React from "react";
+import "./journey.css";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";

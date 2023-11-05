@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./views/Login";
-import Register from "./views/Register";
+import Login from "./authentication/Login";
+import Register from "./authentication/Register";
 import Dashboard from "./views/Dashboard";
 import Profile from "./views/Profile";
 import Leaderboard from "./views/Leaderboard";
-import JourneyAdd from "./components/JourneyAdd";
-import JourneyEdit from "./components/JourneyEdit";
-import AdventureNoteEdit from "./components/AdventureNoteEdit";
-import AdventureNoteAdd from "./components/AdventureNoteAdd";
-import PostRegister from "./views/PostRegister";
+import JourneyAdd from "./components/journey_component/JourneyAdd";
+import JourneyEdit from "./components/journey_component/JourneyEdit";
+import AdventureNoteEdit from "./components/adv_note_component/AdventureNoteEdit";
+import AdventureNoteAdd from "./components/adv_note_component/AdventureNoteAdd";
+import PostRegister from "./authentication/PostRegister";
 
 function App() {
   return (

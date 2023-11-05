@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
-import "../styles/quest.css";
+import "./quest.css";
 import axios from "axios";
 
 export default function Quest({ currentQuest, getQuests }) {

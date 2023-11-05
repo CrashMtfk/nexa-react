@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/journeys_container.css";
 import axios from "axios";
-import Journey from "../components/Journey";
+import Journey from "../components/journey_component/Journey";
 import { useNavigate } from "react-router-dom";
 
 export default function JourneysContainer({ userId }) {

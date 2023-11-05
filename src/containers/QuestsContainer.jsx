@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Quest from "../components/Quest";
+import Quest from "../components/quest_component/Quest";
 import "../styles/quests_container.css";
 import axios from "axios";
 
@@ -44,7 +44,7 @@ export default function QuestsContainer({ userId }) {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,
             },
-          },
+          }
         )
         .then((resp) => {
           getQuests();

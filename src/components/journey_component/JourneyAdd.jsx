@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/journey_add.css";
+import "./journey_add.css";
 import axios from "axios";
-import { processTitle, verifyEmptyData } from "../utils/commonValidation";
+import { processTitle, verifyEmptyData } from "../../utils/commonValidation";
 
 export default function JourneyAdd() {
   const navigate = useNavigate();
@@ -15,10 +15,10 @@ export default function JourneyAdd() {
     if (currentStage < numOfStages) {
       e.preventDefault();
       const stageTitle = document.getElementById(
-        `stageTitle${currentStage}`,
+        `stageTitle${currentStage}`
       ).value;
       const stageDescription = document.getElementById(
-        `stageDescription${currentStage}`,
+        `stageDescription${currentStage}`
       ).value;
       if (processTitle(stageTitle) && !verifyEmptyData(stageDescription)) {
         setStageConfigurations([
@@ -46,7 +46,7 @@ export default function JourneyAdd() {
               headers: {
                 Authorization: "Bearer " + localStorage.token,
               },
-            },
+            }
           )
           .then((resp) => {
             console.log(resp.data);

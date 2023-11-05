@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/adventure_note_edit.css";
+import "./adventure_note_edit.css";
 import {
   processTitle,
   processSingularNoteData,
-} from "../utils/commonValidation";
+} from "../../utils/commonValidation";
 
 export default function AdventureNoteEdit() {
   const navigate = useNavigate();
@@ -20,10 +20,10 @@ export default function AdventureNoteEdit() {
     e.preventDefault();
     if (processTitle(adventureNote.title)) {
       const processedAccomplishment = processSingularNoteData(
-        adventureNote.accomplishment,
+        adventureNote.accomplishment
       );
       const processedImprovement = processSingularNoteData(
-        adventureNote.improvement,
+        adventureNote.improvement
       );
       const processedThought = processSingularNoteData(adventureNote.thought);
       axios
@@ -40,7 +40,7 @@ export default function AdventureNoteEdit() {
             headers: {
               Authorization: "Bearer " + localStorage.token,
             },
-          },
+          }
         )
         .then((resp) => {
           navigate("/dashboard/main-panel");
