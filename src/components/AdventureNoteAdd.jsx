@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import '../styles/adventure_note_add.css';
 import { useNavigate } from "react-router-dom";
+import { processTitle, processSingularNoteData } from "../utils/commonValidation";
 
-export default function AdventureNoteAdd ({userId}) {
+export default function AdventureNoteAdd () {
 
+    const userId = localStorage.userId;
     const [title, setTitle] = useState('');
     const [accomplishment, setAccomplishment] = useState('');
     const [improvement, setImprovement] = useState('');
@@ -13,19 +15,28 @@ export default function AdventureNoteAdd ({userId}) {
 
     const addAdventureNote = (event) => {
         event.preventDefault();
-        axios.post(`http://localhost:8080/user/adventure_note/${userId}`, {
-            title: title,
-            accomplishment: accomplishment,
-            improvement: improvement,
-            thought: thought
-        }, {
-            headers: {
-                Authorization: `Bearer ${localStorage.token}`
-            }
-        })
-        .then(resp => {
-            console.log(resp.data);
-        })
+        
+        if(processTitle(title)){
+            const processedAccomplishment = processSingularNoteData(accomplishment);
+            const processedImprovement = processSingularNoteData(improvement);
+            const processedThought = processSingularNoteData(thought);
+            axios.post(`http://localhost:8080/user/adventure_note/${userId}`, {
+                title: title,
+                accomplishment: processedAccomplishment,
+                improvement: processedImprovement,
+                thought: processedThought
+            },{
+                headers: {
+                    Authorization: `Bearer ${localStorage.token}`
+                }
+            })
+            .then(resp => {
+                setAccomplishment('');
+                setImprovement('');
+                setThought('');
+                navigate("/dashboard/main-panel");
+            })
+        }
     }
 
     return (

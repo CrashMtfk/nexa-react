@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../assets/logo_sign_login.svg';
 import '../styles/login.css';
+import { validateForm } from '../utils/validateLogin';
 
 export default function Login(){
 
@@ -14,17 +15,20 @@ export default function Login(){
         });
 
         const loginUser = (event) => {
-            event.preventDefault();
-            axios.post('http://localhost:8080/api/auth/authenticate', {
-                username : userData.username,
-                password : userData.password
-            })
-            .then(resp => {
-                const authenticatedUser = resp.data;
-                localStorage.setItem('token', authenticatedUser.token);
-                localStorage.setItem('userId', authenticatedUser.userId);
-                navigate("/dashboard/main-panel");
-            });
+            // Check for null inputs, the rest of the errors should be provided from back end
+            if(validateForm(userData.username, userData.password, event)){
+                axios.post('http://localhost:8080/api/auth/authenticate', {
+                    username : userData.username,
+                    password : userData.password
+                })
+                .then(resp => {
+                    const authenticatedUser = resp.data;
+                    localStorage.setItem('token', authenticatedUser.token);
+                    localStorage.setItem('userId', authenticatedUser.userId);
+                    navigate("/dashboard/main-panel");
+                })
+                .catch(err => console.log(err));
+            }
         };
 
         return (
@@ -39,6 +43,7 @@ export default function Login(){
                             <input type="password" onChange={e => setUserData({...userData, password : e.target.value})} name="password" id="password"/>
                             <button type="submit" className='submit-login'>Log In</button>
                         </form>
+                        <div className="error-message" id='error-message'></div>
                         <p>No account? <Link to="/register">Sign here</Link></p>
                     </div>
                     <div className="right-side-login">

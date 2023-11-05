@@ -4,6 +4,7 @@ import Logo from '../assets/logo_sign_login.svg';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/register.css'
+import { validateForm } from "../utils/validateRegister";
 
 export default function Register() {
 
@@ -16,19 +17,19 @@ export default function Register() {
         });
 
         const registerUser = (event) => {
-            event.preventDefault();
-            console.log(userData.username + ' ' + userData.playerName + ' ' + userData.password);
-            axios.post('http://localhost:8080/api/auth/register', {
-                playerName: userData.playerName,
-                username: userData.username,
-                password: userData.password
-            })
-            .then(resp => {
-                const authenticatedUser = resp.data;
-                localStorage.setItem('token', authenticatedUser.token);
-                localStorage.setItem('userId', authenticatedUser.userId);
-                navigate("/introduction");
-            });
+            if(validateForm(userData.username, userData.password, userData.playerName, event)){
+                axios.post('http://localhost:8080/api/auth/register', {
+                    playerName: userData.playerName,
+                    username: userData.username,
+                    password: userData.password
+                })
+                .then(resp => {
+                    const authenticatedUser = resp.data;
+                    localStorage.setItem('token', authenticatedUser.token);
+                    localStorage.setItem('userId', authenticatedUser.userId);
+                    navigate("/introduction");
+                });
+            }
         };
 
         return (
@@ -50,6 +51,7 @@ export default function Register() {
                             <input type="password" onChange={e => setUserData({...userData,password : e.target.value})} name="password" id="password"/>
                             <button type="submit" className="submit-register">Register</button>
                         </form>
+                        <div className="error-message" id="error-message"></div>
                         <p>Already registered?<Link to="/">Log in</Link></p>
                     </div>
                 </div>

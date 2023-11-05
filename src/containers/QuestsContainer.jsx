@@ -7,7 +7,7 @@ export default function QuestsContainer({userId}){
 
     const [quests, setQuests] = useState([]);
     const [isAddingQuest, setIsAddingQuest] = useState(false);
-    const [questTitle, setQuestTitle] = useState('');
+    const [questTitle, setQuestTitle] = useState(null);
     const [difficulty, setDifficulty] = useState(0);
 
     useEffect(() => {
@@ -30,24 +30,32 @@ export default function QuestsContainer({userId}){
 
     const createQuest = (event) => {
         event.preventDefault();
-        axios.post(`http://localhost:8080/user/quest/${userId}`, {
-                    difficulty : {
-                        id : difficulty
-                    },
-                    title: questTitle
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.token}`
+        if(questTitle.length > 0){
+            axios.post(`http://localhost:8080/user/quest/${userId}`, {
+                        difficulty : {
+                            id : difficulty
+                        },
+                        title: questTitle
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.token}`
+                        }
                     }
-                }
-        )
-        .then(resp => {
-            getQuests();
-            setIsAddingQuest(!isAddingQuest);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            )
+            .then(resp => {
+                getQuests();
+                setQuestTitle('');
+                setIsAddingQuest(!isAddingQuest);
+                setDifficulty(0);
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        } else {
+            const questErrorMessage = document.getElementById("quest-error-message");
+            questErrorMessage.innerHTML = "Please enter a quest title";
+        }
     }
 
 
@@ -63,9 +71,16 @@ export default function QuestsContainer({userId}){
                     <div className="quest-form">
                         <form action="" onSubmit={createQuest}>
                             <input type="text" placeholder="Title" onChange={e => setQuestTitle(e.target.value)} name="title" id="title"/>
-                            <input type="number" placeholder="Difficulty" onChange={e => setDifficulty(e.target.value)} name="difficulty" id="difficulty"/><br/>
+                            <select name="difficulty" id="difficulty" placeholder="Difficulty" defaultValue={""} onChange={e => setDifficulty(e.target.value)}>
+                                <option value="" disabled>Difficulty level</option>
+                                <option value="0">S</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                            </select> <br />
                             <button type="submit" className="submit-add">Submit</button>
                         </form>
+                        <div className="quest-error-message error-message" id="quest-error-message"></div>
                     </div>
                 </div>
                 :

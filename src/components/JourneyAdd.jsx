@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/journey_add.css';
 import axios from "axios";
+import { processTitle, verifyEmptyData} from "../utils/commonValidation";
 
 export default function JourneyAdd(){
 
@@ -16,14 +17,17 @@ export default function JourneyAdd(){
             e.preventDefault();
             const stageTitle = document.getElementById(`stageTitle${currentStage}`).value;
             const stageDescription = document.getElementById(`stageDescription${currentStage}`).value;
-
-            setStageConfigurations([...stageConfigurations, {title: stageTitle, description: stageDescription}]);
-            setCurrentStage(currentStage + 1);
+            if(processTitle(stageTitle) && !verifyEmptyData(stageDescription)){
+                setStageConfigurations([...stageConfigurations, {title: stageTitle, description: stageDescription}]);
+                setCurrentStage(currentStage + 1);
+                document.getElementById(`stageTitle${currentStage}`).value = '';
+                document.getElementById(`stageDescription${currentStage}`).value = '';
+            }
         } else {
             const numOfCoins = numOfStages * 100;
             const experience = numOfStages * 75;
-
-            axios.post(`http://localhost:8080/user/journey/${localStorage.userId}`,{
+            if(processTitle(journeyTitle)){
+                axios.post(`http://localhost:8080/user/journey/${localStorage.userId}`,{
                 title: journeyTitle,
                 coins: numOfCoins,
                 experience: experience,
@@ -38,6 +42,8 @@ export default function JourneyAdd(){
                 navigate("/dashboard/main-panel");
             })
             .catch(err => console.log(err));
+            }
+            
         }
     }
 

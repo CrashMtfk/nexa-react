@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import '../styles/adventure_note_edit.css';
+import { processTitle, processSingularNoteData } from "../utils/commonValidation";
 
 export default function AdventureNoteEdit(){
 
@@ -15,21 +16,27 @@ export default function AdventureNoteEdit(){
 
     const editAdventureNote = (e) => {
         e.preventDefault();
-        axios.patch("http://localhost:8080/user/adventure_note", {
-            id : adventureNote.id,
-            title : adventureNote.title,
-            accomplishment : adventureNote.accomplishment,
-            improvement : adventureNote.improvement,
-            thought : adventureNote.thought
-        }, {
-            headers : {
-                Authorization: 'Bearer ' + localStorage.token
-            }
-        })
-        .then(resp => {
-            navigate("/dashboard/main-panel");
-        })
-        .catch(err => console.log(err));
+        if(processTitle(adventureNote.title)){
+            const processedAccomplishment = processSingularNoteData(adventureNote.accomplishment);
+            const processedImprovement = processSingularNoteData(adventureNote.improvement);
+            const processedThought = processSingularNoteData(adventureNote.thought);
+            axios.patch("http://localhost:8080/user/adventure_note", {
+                id : adventureNote.id,
+                title : adventureNote.title,
+                accomplishment : processedAccomplishment,
+                improvement : processedImprovement,
+                thought : processedThought
+            }, {
+                headers : {
+                    Authorization: 'Bearer ' + localStorage.token
+                }
+            })
+            .then(resp => {
+                navigate("/dashboard/main-panel");
+            })
+            .catch(err => console.log(err));
+        }
+        
     }
 
     const initializeFormWithExistingData = () => {
