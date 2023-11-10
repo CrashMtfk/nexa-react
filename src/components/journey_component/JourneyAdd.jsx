@@ -69,7 +69,7 @@ export default function JourneyAdd() {
           </button>
         </div>
         <form className="journey-form-add-header" action="">
-          <class className="input-container">
+          <div className="input-container">
             <input
               type="text"
               onChange={(e) => setJourneyTitle(e.target.value)}
@@ -78,7 +78,7 @@ export default function JourneyAdd() {
               placeholder="Journey Title"
             />
             <span className="sub-line"></span>
-          </class>
+          </div>
           <div className="input-container numOfStages-container">
             <input
               type="number"

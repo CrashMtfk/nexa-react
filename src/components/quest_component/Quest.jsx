@@ -5,18 +5,40 @@ import "./quest.css";
 import axios from "axios";
 
 export default function Quest({ currentQuest, getQuests }) {
-  const [questStatus, setQuestStatus] = useState(false);
+  const [questStatus, setQuestStatus] = useState(currentQuest.status);
   const [isMoreDetailsExpanded, setIsMoreDetailsExpanded] = useState(false);
+
+  const toggleQuestStatus = () => {
+    axios
+      .patch(
+        `http://localhost:8080/user/quest/${currentQuest.id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`,
+          },
+        }
+      )
+      .then((resp) => {
+        setQuestStatus(!questStatus);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const deleteQuest = () => {
     axios
       .delete(`http://localhost:8080/user/quest/${currentQuest.id}`, {
         headers: {
-          Authorization: "Bearer " + localStorage.token,
+          Authorization: `Bearer ${localStorage.token}`,
         },
       })
       .then((resp) => {
         getQuests();
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
 
@@ -27,12 +49,12 @@ export default function Quest({ currentQuest, getQuests }) {
       {questStatus ? (
         <AiIcons.AiOutlineCheckCircle
           className="complete-button"
-          onClick={() => setQuestStatus(!questStatus)}
+          onClick={toggleQuestStatus}
         />
       ) : (
         <BsIcons.BsCircle
           className="complete-button"
-          onClick={() => setQuestStatus(!questStatus)}
+          onClick={toggleQuestStatus}
         />
       )}
       <div className="quest-content-container">

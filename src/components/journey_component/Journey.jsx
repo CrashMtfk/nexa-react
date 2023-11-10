@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./journey.css";
 import * as AiIcons from "react-icons/ai";
-import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Stage from "./Stage";
 
 export default function Journey({ journey, getJourneys }) {
-  const stages = journey.stageDTOSet;
+  const [stages, setStages] = useState(journey.stageDTOSet);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const modifyStages = () => {
+      axios
+        .patch(
+          `http://localhost:8080/user/journey`,
+          {
+            id: journey.id,
+            title: journey.title,
+            stageDTOSet: stages,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.token,
+            },
+          }
+        )
+        .then((resp) => {
+          getJourneys();
+        })
+        .catch((err) => console.log(err));
+    };
+    modifyStages();
+  }, [stages]);
 
   const deleteJourney = () => {
     axios
@@ -20,6 +44,14 @@ export default function Journey({ journey, getJourneys }) {
       .then((resp) => {
         getJourneys();
       });
+  };
+
+  const toggleStageStatus = (stageId) => {
+    setStages((prevStages) =>
+      prevStages.map((stage) =>
+        stage.id === stageId ? { ...stage, status: !stage.status } : stage
+      )
+    );
   };
 
   return (
@@ -49,14 +81,11 @@ export default function Journey({ journey, getJourneys }) {
         <div className="stages-container">
           {stages.map((stage) => {
             return (
-              <div key={stage.id}>
-                {stage.status ? (
-                  <AiIcons.AiFillCheckCircle className="j-complete-button" />
-                ) : (
-                  <BsIcons.BsCircle className="j-complete-button" />
-                )}
-                <span className="stage-connect-line"></span>
-              </div>
+              <Stage
+                key={stage.id}
+                stage={stage}
+                handleStatusChange={toggleStageStatus}
+              />
             );
           })}
         </div>
