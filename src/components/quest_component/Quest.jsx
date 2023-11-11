@@ -3,6 +3,7 @@ import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
 import "./quest.css";
 import axios from "axios";
+import handleExperienceDistribution from "./experienceAllocation";
 
 export default function Quest({ currentQuest, getQuests }) {
   const [questStatus, setQuestStatus] = useState(currentQuest.status);
@@ -21,6 +22,10 @@ export default function Quest({ currentQuest, getQuests }) {
       )
       .then((resp) => {
         setQuestStatus(!questStatus);
+        if (!questStatus === true) {
+          handleExperienceDistribution(currentQuest);
+          deleteQuest();
+        }
       })
       .catch((error) => {
         console.error(error);
