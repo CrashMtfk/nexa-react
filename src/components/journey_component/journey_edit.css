@@ -1,0 +1,41 @@
+.edit-journey-root {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 30%;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+    background-color: var(--bg-main-color);
+}
+
+.journey-edit-form {
+  width: 80%;
+  margin: 5% auto;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+}
+
+.stage-input-container > * {
+    margin: 5px;
+}
+
+.stage-input-container > input{
+    width: 70%;
+    line-height: 30px;
+}
+
+.next-button {
+    width: 30%;
+}
