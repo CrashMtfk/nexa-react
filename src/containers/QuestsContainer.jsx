@@ -3,7 +3,7 @@ import Quest from "../components/quest_component/Quest";
 import "../styles/quests_container.css";
 import axios from "axios";
 
-export default function QuestsContainer({ userId }) {
+export default function QuestsContainer({ userId, modifyExperience }) {
   const [quests, setQuests] = useState([]);
   const [isAddingQuest, setIsAddingQuest] = useState(false);
   const [questTitle, setQuestTitle] = useState(null);
@@ -22,6 +22,7 @@ export default function QuestsContainer({ userId }) {
       })
       .then((resp) => {
         setQuests(resp.data);
+        modifyExperience();
       })
       .catch((error) => {
         console.error(error);

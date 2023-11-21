@@ -5,6 +5,7 @@ import * as BiIcons from "react-icons/bi";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Stage from "./Stage";
+import { verifyCompletion } from "./completion_mechanism";
 
 export default function Journey({ journey, getJourneys }) {
   const [stages, setStages] = useState(journey.stageDTOSet);
@@ -27,7 +28,10 @@ export default function Journey({ journey, getJourneys }) {
           }
         )
         .then((resp) => {
-          getJourneys();
+          if (verifyCompletion(stages, journey)) {
+            deleteJourney();
+            getJourneys();
+          }
         })
         .catch((err) => console.log(err));
     };

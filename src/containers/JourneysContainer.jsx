@@ -4,7 +4,7 @@ import axios from "axios";
 import Journey from "../components/journey_component/Journey";
 import { useNavigate } from "react-router-dom";
 
-export default function JourneysContainer({ userId }) {
+export default function JourneysContainer({ userId, modifyExperience }) {
   const [journeys, setJourneys] = useState([]);
   const navigate = useNavigate();
 
@@ -21,6 +21,7 @@ export default function JourneysContainer({ userId }) {
       })
       .then((resp) => {
         setJourneys(resp.data);
+        modifyExperience();
       });
   };
 

@@ -16,3 +16,17 @@
   display: flex;
   justify-content: space-between;
 }
+
+.xp-bar {
+  margin: 1% auto;
+  width: 90%;
+  height: 20px;
+  border: 1px solid #1C1C1C;
+  overflow: hidden; 
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease; 
+}
