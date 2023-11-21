@@ -49,7 +49,6 @@ export default function JourneyAdd() {
             }
           )
           .then((resp) => {
-            console.log(resp.data);
             navigate("/dashboard/main-panel");
           })
           .catch((err) => console.log(err));

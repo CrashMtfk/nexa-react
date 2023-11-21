@@ -18,7 +18,6 @@ export default function Leaderboard() {
         },
       })
       .then((resp) => {
-        console.log(resp.data);
         setUsers(resp.data);
       });
   };

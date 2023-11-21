@@ -26,7 +26,7 @@ export default function JourneysContainer({ userId, modifyExperience }) {
   };
 
   return (
-    <div>
+    <div className="journeys-root">
       <div className="journeys-header">
         <span className="first-line"></span>
         <h2>Journeys</h2>
