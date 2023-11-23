@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import "./post_register.css";
 
-export default function PostRegister() {
+export default function PostRegister({ setNewUser }) {
   const navigate = useNavigate();
+  setNewUser(true);
 
   return (
     <div className="introduction-background">

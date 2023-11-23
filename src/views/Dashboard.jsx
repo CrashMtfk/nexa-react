@@ -10,8 +10,7 @@ import axios from "axios";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 
-export default function Dashboard({ isNewUser }) {
-  console.log(isNewUser);
+export default function Dashboard({ isNewUser, setNewUser }) {
   const currentUserId = localStorage.userId;
   const [xpPercentage, setXpPercentage] = useState(0);
   const xpBarRef = useRef(null);
@@ -75,6 +74,7 @@ export default function Dashboard({ isNewUser }) {
         ],
       });
       driverObj.drive();
+      setNewUser(!isNewUser);
     } else {
       return;
     }

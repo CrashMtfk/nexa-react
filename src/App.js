@@ -9,19 +9,19 @@ import JourneyEdit from "./components/journey_component/JourneyEdit";
 import AdventureNoteEdit from "./components/adv_note_component/AdventureNoteEdit";
 import AdventureNoteAdd from "./components/adv_note_component/AdventureNoteAdd";
 import PostRegister from "./authentication/PostRegister";
+import { useState } from "react";
 
 function App() {
   const location = useLocation();
   const currentPath = location.pathname;
-  const isNewUser = currentPath === '/introduction' || currentPath;
-  console.log(currentPath);
+  const [isNewUser, setIsNewUser] = useState(false);
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="introduction" element={<PostRegister />} />
+      <Route path="introduction" element={<PostRegister setNewUser={setIsNewUser} />} />
       <Route path="dashboard">
-        <Route path="main-panel" element={<Dashboard isNewUser={isNewUser}/>} />
+        <Route path="main-panel" element={<Dashboard isNewUser={isNewUser} setNewUser={setIsNewUser} />} />
         <Route path="edit-adventure-note" element={<AdventureNoteEdit />} />
         <Route path="add-adventure-note" element={<AdventureNoteAdd />} />
         <Route path="add-journey" element={<JourneyAdd />} />
