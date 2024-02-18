@@ -1,25 +1,34 @@
 import axios from "axios";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { processTitle, verifyEmptyData } from "../../utils/commonValidation";
+import { processTitle} from "../../utils/commonValidation";
 import "./journey_edit.css";
 
 export default function JourneyEdit() {
   const navigate = useNavigate();
   const location = useLocation();
   const journey = location.state.journey;
+  const [games, setGames] = useState([]);
+
+  const getGames = () => {
+    axios.get(`http://localhost:8080/games`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.token,
+      }
+    })
+    .then((resp) => {
+      setGames(resp.data);
+    });
+  };
+
+  useEffect(() => {
+    getGames();
+  },[]);
 
   const modifyJourney = (e) => {
     e.preventDefault();
     if (processTitle(journey.title)) {
       let isDataValid = true;
-      journey.stageDTOSet.forEach((stage) => {
-        if (!processTitle(stage.title) || verifyEmptyData(stage.description)) {
-          isDataValid = false;
-          return;
-        }
-      });
-
       if (isDataValid) {
         axios
           .patch(
@@ -75,20 +84,20 @@ export default function JourneyEdit() {
                 id={`stage-${stage.id}`}
                 className="stage-input-container"
               >
-                <input
-                  type="text"
-                  id={`stageTitle-${stage.id}`}
-                  placeholder={stage.title}
-                  onChange={(e) => (stage.title = e.target.value)}
-                />
-                <textarea
-                  type="text"
-                  id={`stageDescription-${stage.id}`}
-                  placeholder={stage.description}
-                  cols={40}
-                  rows={5}
-                  onChange={(e) => (stage.description = e.target.value)}
-                />
+              <select
+               name="games" 
+               id={`game-${stage.game.id}`}
+               onChange={(e) => stage.game.id = e.target.value}
+               >
+                {games.map(gameList => {
+                    return (
+                        stage.game.id === gameList.id ?
+                        <option key={gameList.id} value={gameList.id} selected>{gameList.title}</option>
+                        :
+                        <option key={gameList.id} value={gameList.id}>{gameList.title}</option>
+                    );
+                })}
+              </select>
               </div>
             );
           })}

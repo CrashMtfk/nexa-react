@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./journey_add.css";
 import axios from "axios";
-import { processTitle, verifyEmptyData } from "../../utils/commonValidation";
+import { processTitle} from "../../utils/commonValidation";
 
 export default function JourneyAdd() {
   const navigate = useNavigate();
@@ -10,25 +10,34 @@ export default function JourneyAdd() {
   const [currentStage, setCurrentStage] = useState(0);
   const [numOfStages, setNumOfStages] = useState(1);
   const [stageConfigurations, setStageConfigurations] = useState([]);
+  const [games, setGames] = useState([]);
+
+  const getGames = () => {
+    axios.get(`http://localhost:8080/games`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.token,
+      }
+    })
+    .then((resp) => {
+      setGames(resp.data);
+    });
+  };
+
+  useEffect(() => {
+    getGames();
+  },[]);
 
   const handleNextStage = (e) => {
     if (currentStage < numOfStages) {
       e.preventDefault();
-      const stageTitle = document.getElementById(
-        `stageTitle${currentStage}`
-      ).value;
-      const stageDescription = document.getElementById(
-        `stageDescription${currentStage}`
-      ).value;
-      if (processTitle(stageTitle) && !verifyEmptyData(stageDescription)) {
-        setStageConfigurations([
-          ...stageConfigurations,
-          { title: stageTitle, description: stageDescription },
-        ]);
-        setCurrentStage(currentStage + 1);
-        document.getElementById(`stageTitle${currentStage}`).value = "";
-        document.getElementById(`stageDescription${currentStage}`).value = "";
-      }
+      const gameId = document.getElementById("games").value;
+      setStageConfigurations([
+        ...stageConfigurations,
+        { game: {
+          id: gameId
+        }},
+      ]);
+      setCurrentStage(currentStage + 1);
     } else {
       const numOfCoins = numOfStages * 100;
       const experience = numOfStages * 75;
@@ -93,21 +102,15 @@ export default function JourneyAdd() {
         {currentStage < numOfStages ? (
           <form className="stage-form-add">
             <h3 className="current-stage">Stage {currentStage + 1}</h3>
-            <div className="input-container stage-input-container">
-              <input
-                type="text"
-                id={`stageTitle${currentStage}`}
-                placeholder={`Title...`}
-              />
-            </div>
             <div className="input-container ">
-              <textarea
-                type="text"
-                cols={40}
-                rows={5}
-                id={`stageDescription${currentStage}`}
-                placeholder={`Description...`}
-              />
+              <label htmlFor="games">Choose a game:</label>
+              <select name="games" id="games">
+                {games.map(game => {
+                  return (
+                    <option key={game.id} value={game.id}>{game.title}</option>
+                  );
+                })}
+              </select>
             </div>
             <button className="next-button" onClick={(e) => handleNextStage(e)}>
               Next

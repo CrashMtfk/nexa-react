@@ -14,7 +14,6 @@ export default function Login() {
   });
 
   const loginUser = (event) => {
-    // Check for null inputs, the rest of the errors should be provided from back end
     if (validateForm(userData.username, userData.password, event)) {
       axios
         .post("http://localhost:8080/api/auth/authenticate", {

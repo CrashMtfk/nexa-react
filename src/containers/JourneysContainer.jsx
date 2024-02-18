@@ -8,10 +8,6 @@ export default function JourneysContainer({ userId, modifyExperience }) {
   const [journeys, setJourneys] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getJourneys();
-  }, []);
-
   const getJourneys = () => {
     axios
       .get(`http://localhost:8080/user/journeys/${userId}`, {
@@ -20,10 +16,14 @@ export default function JourneysContainer({ userId, modifyExperience }) {
         },
       })
       .then((resp) => {
-        setJourneys(resp.data);
+        setJourneys(resp.data); 
         modifyExperience();
       });
   };
+
+  useEffect(() => {
+    getJourneys();
+  },[]);
 
   return (
     <div className="journeys-root">
