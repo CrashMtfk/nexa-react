@@ -1,10 +1,16 @@
 import React from "react";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
-export default function Stage({ stage, handleStatusChange }) {
+export default function Stage({ stage}) {
+  const navigate = useNavigate();
   const handleClick = () => {
-    handleStatusChange(stage.id);
+    navigate("/dashboard/stage-details", {
+      state: {
+         stage: stage
+      },
+    })
   };
 
   return (

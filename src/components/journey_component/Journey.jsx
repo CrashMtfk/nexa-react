@@ -3,13 +3,22 @@ import "./journey.css";
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Stage from "./Stage";
 import { verifyCompletion } from "./completion_mechanism";
 
 export default function Journey({ journey, getJourneys }) {
   const [stages, setStages] = useState(journey.stageDTOSet);
   const navigate = useNavigate();
+  const location = useLocation();
+  let isStageChanged = location.state ? location.state.isChanged : false;
+
+  useEffect(() => {
+    if (isStageChanged) {
+      toggleStageStatus(location.state.stage.id);
+      isStageChanged = false;
+    }
+  }, [isStageChanged, location.state])
 
   useEffect(() => {
     const modifyStages = () => {
@@ -88,7 +97,6 @@ export default function Journey({ journey, getJourneys }) {
               <Stage
                 key={stage.id}
                 stage={stage}
-                handleStatusChange={toggleStageStatus}
               />
             );
           })}

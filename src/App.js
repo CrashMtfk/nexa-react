@@ -10,6 +10,7 @@ import AdventureNoteEdit from "./components/adv_note_component/AdventureNoteEdit
 import AdventureNoteAdd from "./components/adv_note_component/AdventureNoteAdd";
 import PostRegister from "./authentication/PostRegister";
 import { useState } from "react";
+import StageDetails from "./components/journey_component/StageDetails";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
         <Route path="add-adventure-note" element={<AdventureNoteAdd />} />
         <Route path="add-journey" element={<JourneyAdd />} />
         <Route path="edit-journey" element={<JourneyEdit />} />
+        <Route path="stage-details" element={<StageDetails/>} />
       </Route>
       <Route path="profile" element={<Profile />} />
       <Route path="leaderboard" element={<Leaderboard />} />
