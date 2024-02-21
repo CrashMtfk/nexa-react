@@ -11,6 +11,7 @@ export default function JourneyAdd() {
   const [numOfStages, setNumOfStages] = useState(1);
   const [stageConfigurations, setStageConfigurations] = useState([]);
   const [games, setGames] = useState([]);
+  const [selectedGame, setSelectedGame] = useState(null);
 
   const getGames = () => {
     axios.get(`http://localhost:8080/games`, {
@@ -26,6 +27,19 @@ export default function JourneyAdd() {
   useEffect(() => {
     getGames();
   },[]);
+
+  const getSelectedGame = () => {
+    const gameId = document.getElementById("games").value;
+    axios.get(`http://localhost:8080/games/${gameId}`,
+        {
+            headers: {
+                Authorization: "Bearer " + localStorage.token,
+              },
+        })
+        .then(resp => {
+            setSelectedGame(resp.data);
+        })
+  }
 
   const handleNextStage = (e) => {
     if (currentStage < numOfStages) {
@@ -104,13 +118,21 @@ export default function JourneyAdd() {
             <h3 className="current-stage">Stage {currentStage + 1}</h3>
             <div className="input-container ">
               <label htmlFor="games">Choose a game:</label>
-              <select name="games" id="games">
+              <select name="games" id="games" onChange={() => getSelectedGame()}>
+                <option value="default">Select from dropdown</option>
                 {games.map(game => {
                   return (
                     <option key={game.id} value={game.id}>{game.title}</option>
                   );
                 })}
               </select>
+              {selectedGame ? 
+              <div>
+                <p>Description: {selectedGame.description}</p>
+                <p>Difficulty: {selectedGame.difficulty.grade}</p>
+              </div>
+              :
+              null}
             </div>
             <button className="next-button" onClick={(e) => handleNextStage(e)}>
               Next

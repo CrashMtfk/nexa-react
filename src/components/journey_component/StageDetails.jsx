@@ -9,6 +9,8 @@ export default function StageDetails(){
     const location = useLocation();
     const stage = location.state.stage;
     const [game, setGame] = useState([]);
+    const [finishText, setFinishText] = useState("");
+    const [isStageFinished, setIsStageFinished] = useState(false);
 
     const getStageGame = () => {
         axios.get(`http://localhost:8080/games/${stage.game.id}`,
@@ -28,6 +30,7 @@ export default function StageDetails(){
 
     const handleQuizzFinish = () => {
         let correctAnswers = 0;
+        setIsStageFinished(true);
         const REQUIRED_PERCENTAGE = 75;
         const totalQuestions = game.questionDTOList.length;
         for(let i = 0; i < totalQuestions; i++){
@@ -41,39 +44,54 @@ export default function StageDetails(){
         }
         const completionPercentage = (correctAnswers / totalQuestions) * 100;
         if(completionPercentage >= REQUIRED_PERCENTAGE){
-            navigate("/dashboard/main-panel",{
-                state: {
-                    stage: stage,
-                    isChanged: true
-                }
-            });
+            setFinishText("Good job!");
+            setTimeout(() => {
+                navigate("/dashboard/main-panel",{
+                    state: {
+                        stage: stage,
+                        isChanged: true
+                    }
+                });
+            }, 3000);
+            
         } else {
-            navigate("/dashboard/main-panel");
+            setFinishText("Better luck next time!");
+            setTimeout(() => {
+                navigate("/dashboard/main-panel");
+            },3000);
         }
     }
 
     return (
         isDetailsShown ?
-        <div className="add-journey-background">
-            <div className="cancel-container">
-                <button
-                    className="cancel-journey-add add-cancel"
-                    onClick={() => navigate("/dashboard/main-panel")}
-                >
-                x
-                </button>
+        <div className="stage-details-background">
+            <div className="stage-details-container">
+                <div className="cancel-container">
+                    <button
+                        className="cancel-journey-add add-cancel"
+                        onClick={() => navigate("/dashboard/main-panel")}
+                    >
+                    x
+                    </button>
+                </div>
+                <h2 className="stage-title">{stage.game.title}</h2>
+                <p className="stage-description">{stage.game.description}</p>
+                <span className="delimiter"></span>
+                <div className="stage-stats-container">
+                    <p>Difficulty: {stage.game.difficulty.grade}</p>
+                    <p>Experience: {stage.game.difficulty.experience}</p>
+                    <p>Coins: {stage.game.difficulty.coins}</p>
+                </div>
+                <button className="submit-add start-stage-button" onClick={e => setIsDetailsShown(!isDetailsShown)}>Start Stage</button>
             </div>
-            <h2>{stage.game.title}</h2>
-            <p>{stage.game.description}</p>
-            <div>
-                <p>Difficulty: {stage.game.difficulty.grade}</p>
-                <p>Experience: {stage.game.difficulty.experience}</p>
-                <p>Coins: {stage.game.difficulty.coins}</p>
-            </div>
-            <button onClick={e => setIsDetailsShown(!isDetailsShown)}>Start Stage</button>
         </div>
         :
-        <div className="quizz-container">
+        isStageFinished ? 
+            <div>
+                <h2>{finishText}</h2>
+            </div>
+            : 
+            <div className="quizz-container">
             {
                 game.questionDTOList.map(question => {
                     return (
@@ -99,10 +117,10 @@ export default function StageDetails(){
                                 })
                             }
                         </div>
-                    )
-                })
-            }
-            <button onClick={e => handleQuizzFinish()}>Finish</button>
-        </div>
+                        )
+                    })
+                }
+                <button onClick={e => handleQuizzFinish()}>Finish</button>
+            </div>
     )
 }
