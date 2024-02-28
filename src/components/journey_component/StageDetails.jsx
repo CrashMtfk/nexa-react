@@ -53,7 +53,6 @@ export default function StageDetails(){
                     }
                 });
             }, 3000);
-            
         } else {
             setFinishText("Better luck next time!");
             setTimeout(() => {
@@ -87,8 +86,9 @@ export default function StageDetails(){
         </div>
         :
         isStageFinished ? 
-            <div>
-                <h2>{finishText}</h2>
+            <div className="finish-container">
+                <h2 className="finish-text">{finishText}</h2>
+                <p className="redirect-message">Redirecting to dashboard...</p>
             </div>
             : 
             <div className="quizz-container">
@@ -120,7 +120,7 @@ export default function StageDetails(){
                         )
                     })
                 }
-                <button onClick={e => handleQuizzFinish()}>Finish</button>
+                <button className="submit-add finish-stage-button" onClick={e => handleQuizzFinish()}>Finish</button>
             </div>
     )
 }

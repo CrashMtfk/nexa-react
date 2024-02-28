@@ -68,9 +68,16 @@ export default function Dashboard({ isNewUser, setNewUser }) {
             popover: {
               title: "Journeys",
               description:
-                "You can think of these as goals, what I mean is that you can split a journey into different stages so that you create a clear path. To start just give it a title and start specifying each stage's info!",
+                "You can think of these as goals, what I mean is that you can split a journey into different stages so that you create a clear path!",
             },
           },
+          {
+            element: ".create-journey",
+            popover: {
+              title: "How to use",
+              description: "Just give your journey a title, and start selecting the learning game you need for each stage."
+            }
+          }
         ],
       });
       driverObj.drive();
